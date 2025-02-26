@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgba(27, 38, 59, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .cart-item {
+            display: flex;
+            width: 100%;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .left-section {
+            width: 50%;
+            min-height: 100vh;
+            background-color: rgba(27, 38, 59, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            color: white;
+        }
+
+        /* Header Styling */
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(27, 38, 59, 1);
+            color: white;
+        }
+
+        .back-arrow {
+            font-size: 54px;
+            color: white;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .back-arrow:hover {
+            transform: scale(1.1);
+        }
+
+        .logo {
+            color: #E09F3E;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 4px 10px rgba(255, 221, 210, 0.6);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-card {
+            background-color: rgba(27, 43, 80, 0.7);
+            border-radius: 12px;
+            padding: 0;
+            width: 80%;
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+            height: 330px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2), 0px 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .cart-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.2);
+            border-color: rgba(228, 152, 38, 0.7);
+            box-shadow: 0 0 15px 5px rgba(224, 159, 62, 0.7);
+        }
+
+        .cart-card img {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            border-bottom: 2px solid rgba(228, 152, 38, 0.801);
+        }
+
+        .cart-card-content {
+            padding: 15px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .left-section,
+        .right-section{
+            margin-bottom: 30px;
+        }
+
+        .quantity-controls button {
+            background-color: #E09F3E;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1.3rem;
+            color: black;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0px 0px 11px 4px rgba(224, 159, 62, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .quantity-controls button:hover {
+            transform: scale(1.1);
+        }
+
+        .right-section {
+            margin-bottom: 5px;
+            width: 50%;
+            background-color: rgba(27, 38, 59, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            color: white;
+        }
+
+        .quantity-controls span {
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .net-total {
+            background-color: rgba(27, 43, 80, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            color: #FFDDD2;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+
+        .net-total:hover {
+            background-color: rgba(17, 29, 56, 0.7);
+            transform: translateY(-1px);
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.2);
+            border-color: rgba(228, 152, 38, 0.7);
+            box-shadow: 0 0 15px 5px rgba(224, 159, 62, 0.7);
+        }
+
+        .price-breakdown {
+            display: flex;
+            flex-direction: column;
+            height: 336px;
+            width: 80%;
+            padding: 20px;
+            background-color: rgba(27, 43, 80, 0.7);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2), 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .price-breakdown p {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .price-breakdown span {
+            font-size: 1.2rem;
+        }
+
+        .price-breakdown:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.2);
+            border-color: rgba(228, 152, 38, 0.7);
+            box-shadow: 0 0 15px 5px rgba(224, 159, 62, 0.7);
+        }
+
+        .total-amount {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: #E09F3E;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 2px solid rgba(224, 159, 62, 0.5);
+        }
+
+        .nava {
+            height: 40px;
+            margin-top: -45px;
+            width: 300px;
+            margin-left: 480px;
+        }
+
+        .nav-btn {
+            padding: 14px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 15px;
+            width: 100%;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .home,
+        .products {
+            background-color: #E09F3E;
+            color: white;
+        }
+
+        .products {
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .logout {
+            background-color: red;
+            color: white;
+        }
+        .delete-btn {
+        background: transparent;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-left: 290px;
+        transition: transform 0.3s ease;
+        text-decoration: none;
+    }
+
+    .delete-btn:hover {
+        transform: scale(1.1);
+    }
+
+    </style>
+</head>
+
+<body>
+    
+    <!-- Header with Logo and Back Button -->
+    <div class="header">
+        <a href="/" class="back-arrow">&larr;</a>
+        <h1 class="logo">Gen-Z</h1>
+    </div>
+
+    <!-- Loop through products -->
+    <% cartItemsWithTotal.forEach(function(product) { %>
+        <div class="cart-item">
+            <!-- Left section: Product info -->
+            <div class="left-section">
+                <div class="cart-card">
+                    <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="Product Image">
+                    <div class="cart-card-content">
+                        <h2><%= product.name %></h2>
+                        <div class="quantity-controls">
+                            <button>-</button>
+                            <span>1</span>
+                            <button>+</button>
+                            <a href="/cart/<%= product.id %>" class="delete-btn">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="net-total">Net Total: <%= product.total %>rs</div> <!-- Product specific total -->
+            </div>
+        
+            <!-- Right section: Price breakdown -->
+            <div class="right-section">
+                <div class="price-breakdown">
+                    <p><strong>Total MRP:</strong> <span><%= product.price %>rs</span></p>
+                    <p><strong>Discounted MRP:</strong> <span><%= product.discount %>rs</span></p>
+                    <p><strong>Shipping Fee:</strong> <span>20rs</span></p>
+                    <p class="total-amount"><strong>Total Amount:</strong> <span><%= product.total %>rs</span></p> <!-- Product specific total -->
+                </div>
+            </div>
+        </div>
+        <% }); %>
+        
+
+</body>
+
+</html>

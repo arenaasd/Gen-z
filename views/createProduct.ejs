@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Product</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: rgba(27, 38, 59, 1);
+            color: #FFDDD2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            height: 100%;
+        }
+
+        .left-section {
+            width: 70%;
+            margin-top: 48px;
+            margin-right: 100px;
+            padding: 10px;
+            background-color: rgba(27, 38, 59, 1);
+        }
+
+        .right-section {
+            width: 30%;
+            background-color: rgba(27, 38, 59, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .right-section h2, h3{
+            margin-left: 30px;
+        }
+        .right-section h3{
+            margin-top: 10px;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-align: left;
+        }
+
+        .logo {
+            color: #E09F3E;
+            cursor: pointer;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 14px;
+            text-shadow: 2px 4px 10px rgba(255, 221, 210, 0.6);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            color: #FFDDD2 !important;
+            padding: 12px;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border-color: #E09F3E !important;
+            box-shadow: 0px 0px 12px #E09F3E;
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        label {
+            color: #E09F3E !important;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        button {
+            background-color: #E09F3E;
+            color: #000000;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            width: 98%;
+        }
+
+        button:hover {
+            background-color: #FFDDD2;
+            color: #000000;
+        }
+        .poto{
+            border-radius: 20px;
+        }
+
+        .file-input {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            border-radius: 6px;
+            color: #FFDDD2;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .file-input:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        .flash {
+            background-color: rgba(37, 202, 15, 0.9);
+            /* Deep red with transparency */
+            color: #FFDDD2;
+            /* Soft beige text */
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            width: 80%;
+            top: 0;
+            max-width: 400px;
+            position: absolute;
+            left: 55%;
+            transform: translateX(-50%);
+            box-shadow: 0px 4px 12px rgba(224, 159, 62, 0.3);
+            /* Subtle golden glow */
+            border: 1px solid rgba(224, 159, 62, 0.5);
+            /* Soft gold border */
+            animation: fadeIn 0.7s ease-in-out, slideDown 0.7s ease-in-out;
+        }
+
+        /* Smooth fade-in effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -20px);
+            }
+
+            to {
+                transform: translate(-50%, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+      <!-- Flash Message -->
+      <% if (success && success.length> 0) { %>
+        <div class="flash p-4 text-center">
+            <%= success %>
+        </div>
+        <% } %>
+
+    <div class="container">
+        <div class="right-section">
+            <header class="logo-container">
+                <h1 class="logo">Gen-Z</h1>
+                <h2 class="text-xl font-bold mb-2 mt-14">All Products</h2>
+                <h3 class="text-lg font-bold" style="margin-bottom: 10px;">Create New Product</h3>
+            </header>
+            <div style="
+            width: 0;
+            margin-right: 50px;
+            height: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            border-left: 2px solid rgba(0, 0, 0, 0.8);
+        ">
+        </div>
+        </div>
+  
+    
+
+        <div class="left-section">
+            <h2 class="text-xl font-bold text-center ">Create New Product</h2>
+            <form action="/product/create" method="post" enctype="multipart/form-data">
+                <h3 class="text-lg font-bold mb-3">Product Details</h3>
+                <div class="form-group">
+                    <label for="productImage">Product Image</label>
+                    <input class="poto" type="file" name="image" id="productImage" 
+                        style="width: 100%; font-size: 14px; padding: 6px; 
+                        border: none; border-radius: 6px; 
+                        background-color: rgba(255, 255, 255, 0.15); 
+                        color: #5e5856; cursor: pointer;">
+                </div>
+                
+                <div class="input-group" style="display: flex; gap: 10px; width: 100%;">
+                    <div class="form-group" style="flex: 1; width: 100%;">
+                        <label for="productName">Product Name</label>
+                        <input type="text" name="name" id="name" placeholder="Enter product name" required style="width: 100%;">
+                    </div>
+                    <div class="form-group" style="flex: 1; width: 100%;">
+                        <label for="productPrice">Product Price</label>
+                        <input type="number" name="price" id="price" placeholder="Enter product price" required style="width: 100%;">
+                    </div>
+                </div>
+                <div class="form-group" style="width: 100%;">
+                    <label for="productDiscount">Product Discount</label>
+                    <input type="number" name="discount" id="discount" placeholder="Enter discount" required style="width: 100%;">
+                </div>
+                <div class="input-group" style="display: flex; gap: 10px; width: 100%;">
+                </div>
+                <button type="submit" style="width: 100%;">Create Product</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                let flashMessage = document.querySelector(".flash");
+                if (flashMessage) {
+                    flashMessage.style.transition = "opacity 0.5s ease-out";
+                    flashMessage.style.opacity = "0";
+                    setTimeout(() => flashMessage.remove(), 500);
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>

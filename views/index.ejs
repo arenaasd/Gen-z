@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css">
+    <style>
+        body {
+            background-color: rgba(27, 38, 59, 1);
+            display: flex;
+        }
+
+        .left-section {
+            width: 20%;
+            min-height: 100vh;
+            background-color: rgba(27, 38, 59, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            justify-content: flex-start;
+            padding: 20px;
+            border-radius: 10px 0 0 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4),
+                0px -10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .left-section p {
+            margin-left: 32px;
+            margin-bottom: 5px;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: rgba(200, 200, 200, 0.9);
+            border-radius: 8px;
+        }
+
+        .nava {
+            margin-top: 70px;
+            margin-left: 10px;
+            width: 100%;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            text-align: left;
+        }
+
+        .logo {
+            color: #E09F3E;
+            cursor: pointer;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 34px;
+            text-shadow: 2px 4px 10px rgba(255, 221, 210, 0.6);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .dropdown-label {
+            font-size: 1rem;
+            margin-left: 32px;
+            font-weight: bold;
+            color: rgba(200, 200, 200, 0.9);
+        }
+
+        .dropdown {
+            background-color: rgba(15, 25, 50, 0.9);
+            color: #FFDDD2;
+            margin-top: 55px;
+            border: 1px solid rgba(224, 159, 62, 0.5);
+            padding: 8px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .dropdown:hover {
+            background-color: rgba(20, 30, 60, 1);
+        }
+
+        .dropdown:focus {
+            border-color: #E09F3E;
+            box-shadow: 0px 0px 10px rgba(224, 159, 62, 0.8);
+            outline: none;
+        }
+
+        .filter-label {
+            font-size: 1rem;
+            margin-left: 32px;
+            font-weight: bold;
+            color: rgba(200, 200, 200, 0.9);
+            margin-top: 20px;
+        }
+
+        .left-section a {
+            border-radius: 15px;
+        }
+
+        .filter-option {
+            font-size: 1rem;
+            cursor: pointer;
+            margin-left: 32px;
+            font-weight: bold;
+            color: rgba(165, 160, 160, 0.9);
+        }
+
+
+        .nav-btn {
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            /* Set width to 100% so the buttons fill the container */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .home,
+        .products {
+            background-color: #E09F3E;
+            color: white;
+            margin-left: 50px;
+        }
+
+        .products {
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .logout {
+            background-color: red;
+            color: white;
+        }
+
+        /* Hover Effect */
+        .nav-btn:hover {
+            background-color: white;
+            color: #333;
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3), 0px 6px 10px rgba(0, 0, 0, 0.2);
+            border-color: rgba(228, 152, 38, 0.7);
+            box-shadow: 0 0 15px 5px rgba(224, 159, 62, 0.7);
+        }
+
+        .right-section {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background-color: rgba(15, 25, 50, 1);
+            gap: 20px;
+            /* Increased gap for better spacing */
+            align-items: flex-start;
+        }
+
+        .card {
+            background-color: rgba(27, 43, 80, 0.7);
+            /* Lighter golden color */
+            border-radius: 12px;
+            /* Softer corners */
+            overflow: hidden;
+            margin-top: 60px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadows */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: calc(25% - 15px);
+            height: 180px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Smooth transition for hover effects */
+            border: 4px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            /* Lift effect on hover */
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.15), 0px 6px 10px rgba(0, 0, 0, 0.1);
+            border-color: rgba(228, 152, 38, 0.7);
+            /* Golden glowing border */
+            box-shadow: 0 0 15px 5px rgba(224, 159, 62, 0.7);
+            /* Glowing border effect */
+        }
+
+        .card-img {
+            height: 70%;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 4px solid rgba(228, 152, 38, 0.801);
+            /* Soft border between image and content */
+            transition: opacity 0.3s ease;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card:hover .card-img {
+            opacity: 0.85;
+            /* Slight opacity change on hover */
+        }
+
+        .card-content {
+            height: 30%;
+            background-color: rgba(168, 168, 168, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: black;
+            padding: 5px;
+            border-top: 2px solid rgba(0, 0, 0, 0.1);
+            /* Subtle top border */
+            color: white;
+            font-weight: bold;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            margin-right: 30px;
+        }
+
+        .card-price {
+            margin-right: 30px;
+            margin-bottom: 24px;
+        }
+
+        .add-icon {
+            background-color: #E09F3E;
+            border-radius: 50%;
+            width: 45px;
+            color: black;
+            border: 2px solid black;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            position: absolute;
+            box-shadow: 0px 0px 11px 4px rgba(224, 159, 62, 0.6);
+            right: 10px;
+            bottom: 5px;
+        }
+
+        .add-icon:hover {
+            transform: scale(1.1);
+            /* Slight scale effect on hover */
+        }
+
+ /* Back Arrow Button */
+.back-arrow-btn {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    justify-content: center;
+    width: 40px;  /* Size of the button */
+    height: 30px; /* Size of the button */
+    margin-right: 180px;
+    margin-bottom: 80px;
+    color: white;
+    font-size: 44px; /* Larger arrow size */
+    border-radius: 50%; /* Circular button */
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+/* Arrow inside the button */
+.arrow {
+    font-size: 54px; /* Larger arrow */
+    transition: transform 0.3s ease-in-out;
+}
+
+.flash {
+            background-color: rgba(37, 202, 15, 0.9);
+            /* Deep red with transparency */
+            color: #FFDDD2;
+            /* Soft beige text */
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            width: 80%;
+            top: 0;
+            max-width: 400px;
+            position: absolute;
+            left: 55%;
+            transform: translateX(-50%);
+            box-shadow: 0px 4px 12px rgba(224, 159, 62, 0.3);
+            /* Subtle golden glow */
+            border: 1px solid rgba(224, 159, 62, 0.5);
+            /* Soft gold border */
+            animation: fadeIn 0.7s ease-in-out, slideDown 0.7s ease-in-out;
+        }
+
+        /* Smooth fade-in effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -20px);
+            }
+
+            to {
+                transform: translate(-50%, 0);
+            }
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <% if (success && success.length> 0) { %>
+        <div class="flash p-4 text-center">
+            <%= success %>
+        </div>
+        <% } %>
+
+    <div class="left-section">
+        <a href="/user/login" class="back-arrow-btn">
+            <span class="arrow">&#8592;</span>
+        </a>
+        
+        <header class="logo-container">
+            <h1 class="logo">Gen-Z</h1>
+            <label for="sort-by" class="dropdown-label">Sort By:</label>
+            <select style="margin-bottom: 40px;" id="sort-by" class="dropdown">
+                <option value="popular">Popular</option>
+                <option value="newest">Newest</option>
+            </select>
+            <p class="section-title">All Products</p>
+            <p class="section-title">New Collection</p>
+            <p style="margin-bottom: 50px;" class="section-title">Discounted Products</p>
+            <p class="filter-label">Filter By:</p>
+            <p class="filter-option">Availability</p>
+            <p class="filter-option">Discount</p>
+
+            <div class="nava">
+                <a href="/cart" class="nav-btn products">Cart</a>
+                <a href="/logout" class="nav-btn logout">Logout</a>
+            </div>
+        </header>
+
+    </div>
+    <div class="right-section">
+
+        <% products.forEach(function(product) { %>
+            <div class="card">
+                <div class="card-img">
+                    <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="Product Image" />
+
+                </div>
+                <div class="card-content">
+                    <span class="card-title">
+                        <%= product.name %>
+                    </span>
+                    <span class="card-price">
+                        <%= product.price %>
+                    </span>
+                        <a href="/cart<%= product.id %>" class="add-icon">+</a>              
+                </div>
+            </div>
+            <% }); %>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                let flashMessage = document.querySelector(".flash");
+                if (flashMessage) {
+                    flashMessage.style.transition = "opacity 0.5s ease-out";
+                    flashMessage.style.opacity = "0";
+                    setTimeout(() => flashMessage.remove(), 500);
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>

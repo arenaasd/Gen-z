@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: rgba(27, 38, 59, 1);
+            color: #FFDDD2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            flex-direction: column;
+        }
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-align: left;
+        }
+        .logo {
+            color: #E09F3E;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 2px 4px 10px rgba(255, 221, 210, 0.6);
+            transition: transform 0.3s ease-in-out;
+        }
+        .logo:hover {
+            transform: scale(1.1);
+        }
+        .form-container {
+            width: 34%;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            background-color: transparent;
+            box-shadow: none;
+            border: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        input {
+            color: #FFDDD2 !important;
+            padding: 16px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 4px 12px rgba(255, 221, 210, 0.2);
+        }
+        input:focus {
+            border-color: #E09F3E !important;
+            box-shadow: 0px 0px 12px #E09F3E;
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        label {
+            color: #E09F3E !important;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        button {
+            background-color: #E09F3E;
+            color: #000000;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+        button:hover {
+            background-color: #FFDDD2;
+            color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0px 4px 10px rgba(255, 221, 210, 0.5);
+        }
+        .login-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #FFDDD2;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.2s;
+        }
+        .login-link:hover {
+            color: #E09F3E;
+            transform: scale(1.05);
+        }
+        
+        .flash {
+            background-color: rgba(155, 44, 44, 0.9);
+            /* Deep red with transparency */
+            color: #FFDDD2;
+            /* Soft beige text */
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            width: 80%;
+            top: 0;
+            max-width: 400px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0px 4px 12px rgba(224, 159, 62, 0.3);
+            /* Subtle golden glow */
+            border: 1px solid rgba(224, 159, 62, 0.5);
+            /* Soft gold border */
+            animation: fadeIn 0.7s ease-in-out, slideDown 0.7s ease-in-out;
+        }
+
+        /* Smooth fade-in effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Slight slide-down effect for elegance */
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -20px);
+            }
+
+            to {
+                transform: translate(-50%, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <% if (error && error.length> 0) { %>
+        <div class="flash p-4 text-center">
+            <%= error %>
+        </div>
+        <% } %>
+    <header class="logo-container">
+        <h1 class="logo">Gen-Z</h1>
+    </header>
+    <div class="form-container">
+        <form action="/user/login" method="post">
+            <div class="relative z-0 w-full mb-6 group">
+                <label for="email">Email address</label>
+                <input type="email" name="email" id="email" class="block w-full" placeholder="Enter your email" required />
+            </div>
+            <div class="relative z-0 w-full mb-6 group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="block w-full" placeholder="Enter your password" required />
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <a href="/user/register" class="login-link">Don't have an account? <span>Create Account</span></a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                let flashMessage = document.querySelector(".flash");
+                if (flashMessage) {
+                    flashMessage.style.transition = "opacity 0.5s ease-out";
+                    flashMessage.style.opacity = "0";
+                    setTimeout(() => flashMessage.remove(), 500);
+                }
+            }, 3000);
+        });
+    </script>
+    
+</body>
+</html>
