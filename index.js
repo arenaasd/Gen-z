@@ -33,4 +33,7 @@ app.use('/product', productsroute);
 app.use('/user', loginroute);
 app.use('/', shop);
 
-module.exports = app; // Export app instead of app.listen
+// Wrap express app with Vercel's handler
+module.exports = (req, res) => {
+  app(req, res);
+};
