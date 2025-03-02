@@ -24,7 +24,7 @@ router.get('/cart',isloggedin,async (req, res) =>{
 })
 
 router.get('/cart:productid',isloggedin,async (req, res) =>{
-    let user =await usermodel.findOne({email: req.user.email});
+    let user =await usermodel.findOneAndDelete({email: req.user.email});
     await user.cart.push(req.params.productid)
     await user.save();
     req.flash('success', 'Added to cart successfully');
