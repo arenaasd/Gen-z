@@ -24,6 +24,8 @@ app.use(expressSession({
     saveUninitialized: false
 }));
 app.use(flash());
+app.set('views', path.join(__dirname, 'views'));
+
 
 
 
