@@ -32,6 +32,5 @@ app.use('/user', loginroute);
 app.use('/', shop);
 
 // Wrap express app with Vercel's handler
-module.exports = (req, res) => {
-  app(req, res);
-};
+const server = require('http').createServer(app);
+module.exports = server;
