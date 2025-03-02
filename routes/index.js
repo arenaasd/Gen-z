@@ -36,11 +36,14 @@ router.get('/logout',isloggedin, (req, res) =>{
     res.redirect('/user/login');
 })
 
-router.get('/cartdel/:productid',isloggedin,async (req, res) =>{
-    let user =await  usermodel.findOneAndDelete({email: req.user.email});
-   await user.cart.pull(req.params.productid);
-   await user.save();
-    res.redirect('/cart');
-})
+router.get('/cartdel/:productid', isloggedin, async (req, res) => {
+    let user = await usermodel.findOne({ email: req.user.email }); // ✅ Just find the user (Don't delete)
+
+    user.cart.pull(req.params.productid); // ✅ Remove the product from the cart
+    await user.save();
+    
+    res.redirect('/cart'); // ✅ Redirect back to cart page
+});
+
 
 module.exports = router;
