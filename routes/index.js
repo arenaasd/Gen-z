@@ -37,7 +37,7 @@ router.get('/logout',isloggedin, (req, res) =>{
 })
 
 router.get('/cart/:productid',isloggedin,async (req, res) =>{
-    let user =await  usermodel.findOne({email: req.user.email}).limit(12);
+    let user =await  usermodel.findOneAndDelete({email: req.user.email}).limit(12);
     user.cart.pull(req.params.productid);
     user.save();
     res.redirect('/cart');
