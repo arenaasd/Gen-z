@@ -5,23 +5,21 @@ const isloggedin = require('../middlewares/isloggedin')
 const isowner = require('../middlewares/isOwner')
 
 
-if(process.env.NODE_ENV){
-    router.post('/create' ,async (req, res)=>{
-       const owners = await ownerModel.find();
-        if(owners.length > 0){
-            return
-            res.status(503).send('You Dont have permission to create owner.');
-        }
+router.post('/create', async (req, res) => {
+   const owners = await ownerModel.find();
+   if (owners.length > 0) {
+       return res.status(503).send('You Don’t have permission to create owner.');
+   }
 
-        const {fullname, email, password} = req.body;
-        const createdowner = await ownerModel.create({
-            fullname,
-            email,
-            password
-        })
-        res.status(201).send(createdowner);
-    });
-}
+   const { fullname, email, password } = req.body;
+   const createdowner = await ownerModel.create({
+       fullname,
+       email,
+       password
+   });
+   res.status(201).send(createdowner);
+});
+
 
 
 
