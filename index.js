@@ -4,7 +4,6 @@ const path = require('path');
 const flash = require('connect-flash');
 const expressSession = require('express-session');
 const cookieparser = require('cookie-parser');
-const ownersroute = require('../routes/ownerRoutes');
 const registerroute = require('../routes/registerRoutes');
 const productsroute = require('../routes/productsRoutes');
 const db = require('../config/mongoose-connection');
@@ -27,7 +26,6 @@ app.use(
 );
 app.use(flash());
 
-app.use('/owner', ownersroute);
 app.use('/user', registerroute);
 app.use('/product', productsroute);
 app.use('/user', loginroute);
